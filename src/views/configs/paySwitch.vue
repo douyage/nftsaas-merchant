@@ -20,13 +20,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { pay, putPay } from '@/api/configs'
 import { payOptions } from '@/utils/explain'
 export default {
   name: 'Pay',
+  computed: {
+    ...mapGetters(['integral_use'])
+  },
   data() {
     return {
-      payOptions: payOptions.slice(-2),
+      payOptions: [],
       btnLoading: false,
       form: {
         // on-开启 off-关闭
@@ -41,6 +45,11 @@ export default {
   },
   methods: {
     init() {
+      if (this.integral_use) {
+        this.payOptions = payOptions.slice(3)
+      } else {
+        this.payOptions = payOptions.slice(2)
+      }
       this.getList()
     },
     getList() {

@@ -84,12 +84,20 @@ router.beforeEach(async(to, from, next) => {
               let serverRoute = response.data.menus || []
 
               if (!store.getters.integral_use) {
-                const integralRoutes = ['integral', 'integral_price', 'task']
                 // 不使用积分，过滤掉关于积分的路由
+                const integralRoutes = ['integral', 'integral_price', 'task']
                 serverRoute = serverRoute.map(item => {
                   item.list = item.list.filter((list_item) => {
                     return !integralRoutes.includes(list_item.alias)
                   })
+                  return item
+                })
+              }
+
+              if (store.getters.info.wallet_status === 0) {
+                // 过滤掉云账号开户费用配置的路由
+                serverRoute = serverRoute.map(item => {
+                  item.list = item.list.filter(list_item => list_item.alias !== 'openAmount')
                   return item
                 })
               }

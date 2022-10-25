@@ -1,22 +1,28 @@
 import store from '@/store'
 const integral = store.getters.integral
 const integral_use = store.getters.integral_use
+const info = store.getters.info
 
 // 过滤积分相关内容
 const integralFilter = (array, value) => {
   return integral_use ? array : array.filter(item => { return item.value !== value })
 }
+const init_wallet = (array) => {
+  return info.wallet_status === 0 ? array : [...array, { label: '云账号钱包', value: 'sandpay' }]
+}
 
 export const payOptions = integralFilter(
-  [
-    { label: '全部', value: '' },
-    { label: integral, value: 'integral' },
-    { label: '微信', value: 'wxpay' },
-    { label: '支付宝', value: 'alipay' },
-    // { label: '农行', value: 'abcpay' },
-    // { label: '京东', value: 'jdpay' },
-    { label: '银行卡快捷', value: 'bank' }
-  ],
+  init_wallet(
+    [
+      { label: '全部', value: '' },
+      { label: integral, value: 'integral' },
+      { label: '微信', value: 'wxpay' },
+      { label: '支付宝', value: 'alipay' },
+      // { label: '农行', value: 'abcpay' },
+      // { label: '京东', value: 'jdpay' },
+      { label: '银行卡快捷', value: 'bank' }
+    ]
+  ),
   'integral'
 )
 
