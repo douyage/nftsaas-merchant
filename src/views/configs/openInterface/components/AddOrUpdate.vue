@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ typeExplain[type] }}开发接口配置</p>
+    <p>{{ typeExplain[type] }}开放接口配置</p>
     <el-form ref="form" :model="form[type]" :rules="rules" label-width="110px">
       <template v-if="form[type]">
         <el-form-item label="app_id" prop="app_id">
