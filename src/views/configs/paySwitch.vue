@@ -26,11 +26,14 @@ import { payOptions } from '@/utils/explain'
 export default {
   name: 'Pay',
   computed: {
-    ...mapGetters(['integral_use'])
+    ...mapGetters(['integral_use']),
+    payOptions() {
+      const sliceNum = this.integral_use ? 3 : 2
+      return payOptions.slice(sliceNum)
+    }
   },
   data() {
     return {
-      payOptions: [],
       btnLoading: false,
       form: {
         // on-开启 off-关闭
@@ -45,11 +48,6 @@ export default {
   },
   methods: {
     init() {
-      if (this.integral_use) {
-        this.payOptions = payOptions.slice(3)
-      } else {
-        this.payOptions = payOptions.slice(2)
-      }
       this.getList()
     },
     getList() {
