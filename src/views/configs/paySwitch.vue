@@ -3,7 +3,8 @@
     <el-form ref="form" :model="form" :rules="rules" label-position="left" label-width="140px">
       <el-form-item v-for="(item, index) in payOptions" :key="index" :label="item.label + '支付'" :prop="item.value">
         <span slot="label">
-          <span class="svg">
+          <img v-if="item.value === 'sandpay'" src="@/assets/images/yun.png" alt="" class="icon">
+          <span v-else class="svg">
             <svg-icon :icon-class="item.value" />
           </span>
           {{ item.label }}支付
@@ -80,6 +81,10 @@ export default {
   vertical-align: middle;
 }
 svg.svg-icon {
+  width: 24px;
+  height: 24px;
+}
+.icon {
   width: 24px;
   height: 24px;
 }
