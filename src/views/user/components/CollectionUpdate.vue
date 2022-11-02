@@ -168,6 +168,8 @@ export default {
       this.visible = true
       this.form.id = data.id
       this.form.name = data.name
+      this.pages.current = 1
+      this.search = { target_type: '', keywords: '' }
       this.getList()
     },
     lookAll(data) {
